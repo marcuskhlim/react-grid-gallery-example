@@ -15,7 +15,13 @@ export default function App() {
   const [index, setIndex] = useState(-1);
 
   const handleClick = (index, item) => setIndex(index);
-  const {selectedGallery, setSelectedGallery} = useState("1");
+  const [selectedGallery, setSelectedGallery] = useState("1");
+
+const handleGalleryClick = () => {
+    console.log("parent click");
+    console.log(selectedGallery);
+  };
+
   const galleries = [{
     id: '72157677539266623',
     name: 'Animals'
@@ -27,7 +33,7 @@ export default function App() {
     <div>
         <GallerySelector
           galleries={galleries}
-          onGalleryClick={setSelectedGallery}
+          onGalleryClick={handleGalleryClick}
           selectedGallery={selectedGallery} />
 
       <Gallery

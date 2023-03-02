@@ -3,7 +3,7 @@ import { Gallery } from "react-grid-gallery";
 import GallerySelector from './GallerySelector';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
-import { images, CustomImage } from "./images";
+import { images, images2, CustomImage, imagesMap } from "./images";
 
 const slides = images.map(({ original, width, height }) => ({
   src: original,
@@ -13,20 +13,27 @@ const slides = images.map(({ original, width, height }) => ({
 
 export default function App() {
   const [index, setIndex] = useState(-1);
-
+  const [gallerySelected, setGallerySelected] = useState(images);
   const handleClick = (index, item) => setIndex(index);
-  const [selectedGallery, setSelectedGallery] = useState("1");
+  const [selectedGallery, setSelectedGallery] = useState("A");
 
-const handleGalleryClick = () => {
-    console.log("parent click");
-    console.log(selectedGallery);
+const handleGalleryClick = (galleryId) => {
+    console.log("parent click "+galleryId);
+    setSelectedGallery(galleryId);
+    if (galleryId == "A") {
+      setGallerySelected(images);
+    } else if (galleryId == "B") {
+      setGallerySelected(images2);
+    }
+    console.log(galleryId);
+    
   };
 
   const galleries = [{
-    id: '72157677539266623',
+    id: 'A',
     name: 'Animals'
   }, {
-    id: '72157675104433185',
+    id: 'B',
     name: 'Autumn'
   }];
   return (
@@ -37,7 +44,7 @@ const handleGalleryClick = () => {
           selectedGallery={selectedGallery} />
 
       <Gallery
-        images={images}
+        images={gallerySelected}
         onClick={handleClick}
         enableImageSelection={false}
       />

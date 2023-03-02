@@ -9,7 +9,7 @@ import './gallery-selector.css';
 export default class GallerySelector extends React.Component {
   render() {
     const {galleries, selectedGallery, onGalleryClick} = this.props;
-
+    console.log("GallerySelector RENDER called");
     return (
       <div className="gallery-selector">
         {galleries.map((gallery) =>
@@ -17,7 +17,7 @@ export default class GallerySelector extends React.Component {
             className="gallery-selector-button"
             key={gallery.name}
             disabled={selectedGallery === gallery.id}
-            onClick={onGalleryClick(gallery.id)}>
+            onClick={()=>onGalleryClick(gallery.id)}>
             {gallery.name}
           </button>
         )}
